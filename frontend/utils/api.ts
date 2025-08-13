@@ -75,8 +75,14 @@ export const couplesAPI = {
 };
 
 export const activitiesAPI = {
-  create: async (data: ActivityCreate): Promise<{ message: string; activity_id: string }> => {
-    const response = await api.post('/activities/create', data);
+  create: async (data: Omit<ActivityCreate, 'receiver_id'>): Promise<{ message: string; activity_id: string }> => {
+    // Get partner info to get the receiver_id
+    const partner = await api.get('/couples/my-partner');
+    const fullData: ActivityCreate = {
+      ...data,
+      receiver_id: partner.data.id
+    };
+    const response = await api.post('/activities/create', fullData);
     return response.data;
   },
 
