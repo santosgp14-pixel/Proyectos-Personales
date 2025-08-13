@@ -534,7 +534,7 @@ async def create_mood(mood_data: MoodCreate, current_user: User = Depends(get_cu
 @api_router.get("/moods/my-moods")
 async def get_my_moods(current_user: User = Depends(get_current_user)):
     moods = await db.moods.find({"user_id": current_user.id}).sort("date", -1).to_list(30)
-    return moods
+    return serialize_doc(moods)
 
 @api_router.get("/moods/partner-mood")
 async def get_partner_mood(current_user: User = Depends(get_current_user)):
