@@ -81,10 +81,13 @@ class LoveActsAPITester:
     
     def test_user_registration(self):
         """Test user registration for both users"""
-        # Register User 1 - Sofia
+        import time
+        timestamp = str(int(time.time()))
+        
+        # Register User 1 - Sofia with unique email
         user1_data = {
             "name": "Sofia Martinez",
-            "email": "sofia.martinez@email.com",
+            "email": f"sofia.martinez.{timestamp}@email.com",
             "password": "MiAmorEterno2024!"
         }
         
@@ -97,10 +100,10 @@ class LoveActsAPITester:
             self.log_test("User Registration - Sofia", False, "Failed to register Sofia", data)
             return False
         
-        # Register User 2 - Carlos
+        # Register User 2 - Carlos with unique email
         user2_data = {
             "name": "Carlos Rodriguez",
-            "email": "carlos.rodriguez@email.com", 
+            "email": f"carlos.rodriguez.{timestamp}@email.com", 
             "password": "TeAmoParaSiempre2024!"
         }
         
