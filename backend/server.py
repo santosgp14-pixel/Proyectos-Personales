@@ -551,7 +551,7 @@ async def get_partner_mood(current_user: User = Depends(get_current_user)):
         }
     })
     
-    return mood
+    return serialize_doc(mood)
 
 # Achievements endpoints
 @api_router.get("/achievements/my-achievements")
