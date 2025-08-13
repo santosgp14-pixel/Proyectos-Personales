@@ -438,12 +438,12 @@ async def create_activity(activity_data: ActivityCreate, current_user: User = De
 @api_router.get("/activities/my-activities")
 async def get_my_activities(current_user: User = Depends(get_current_user)):
     activities = await db.activities.find({"giver_id": current_user.id}).sort("created_at", -1).to_list(None)
-    return activities
+    return serialize_doc(activities)
 
 @api_router.get("/activities/partner-activities")
 async def get_partner_activities(current_user: User = Depends(get_current_user)):
     activities = await db.activities.find({"receiver_id": current_user.id}).sort("created_at", -1).to_list(None)
-    return activities
+    return serialize_doc(activities)
 
 @api_router.post("/activities/{activity_id}/rate")
 async def rate_activity(activity_id: str, rating_data: ActivityRating, current_user: User = Depends(get_current_user)):
