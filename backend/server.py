@@ -568,9 +568,9 @@ async def get_dashboard_stats(current_user: User = Depends(get_current_user)):
     # Average rating received (ratings I gave to received activities)
     received_activities = await db.activities.find({
         "receiver_id": current_user.id,
-        "rating": {"$exists": True}
+        "rating": {"$exists": True, "$ne": None}
     }).to_list(None)
-    avg_rating_received = sum(act["rating"] for act in received_activities) / len(received_activities) if received_activities else 0
+    avg_rating_received = sum(act["rating"] for act in received_activities if act["rating"] is not None) / len(received_activities) if received_activities else 0
     
     # Pending ratings
     pending = await db.activities.count_documents({
