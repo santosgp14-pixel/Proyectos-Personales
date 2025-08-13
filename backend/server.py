@@ -493,7 +493,7 @@ async def get_special_memories(current_user: User = Depends(get_current_user)):
     
     # Randomize and return up to 10
     random.shuffle(five_star_activities)
-    return five_star_activities[:10]
+    return serialize_doc(five_star_activities[:10])
 
 # Moods endpoints
 @api_router.post("/moods/create")
