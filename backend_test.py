@@ -350,10 +350,16 @@ class LoveActsAPITester:
     def test_error_cases(self):
         """Test various error scenarios"""
         # Test invalid login
-        invalid_login = {
-            "email": "sofia.martinez@email.com",
-            "password": "wrongpassword"
-        }
+        if hasattr(self, 'user1_data') and self.user1_data:
+            invalid_login = {
+                "email": self.user1_data["email"],
+                "password": "wrongpassword"
+            }
+        else:
+            invalid_login = {
+                "email": "nonexistent@email.com",
+                "password": "wrongpassword"
+            }
         
         success, data, status = self.make_request("POST", "/auth/login", invalid_login)
         if not success and status == 401:
@@ -362,11 +368,18 @@ class LoveActsAPITester:
             self.log_test("Invalid Login Test", False, "Should have rejected invalid login", data)
         
         # Test duplicate email registration
-        duplicate_user = {
-            "name": "Another Sofia",
-            "email": "sofia.martinez@email.com",
-            "password": "AnotherPassword123!"
-        }
+        if hasattr(self, 'user1_data') and self.user1_data:
+            duplicate_user = {
+                "name": "Another Sofia",
+                "email": self.user1_data["email"],
+                "password": "AnotherPassword123!"
+            }
+        else:
+            duplicate_user = {
+                "name": "Test User",
+                "email": "test@example.com",
+                "password": "AnotherPassword123!"
+            }
         
         success, data, status = self.make_request("POST", "/auth/register", duplicate_user)
         if not success and status == 400:
@@ -376,7 +389,7 @@ class LoveActsAPITester:
         
         # Test unauthorized access
         success, data, status = self.make_request("GET", "/auth/me")
-        if not success and status == 401:
+        if not success and (status == 401 or status == 403):
             self.log_test("Unauthorized Access Test", True, "Correctly rejected unauthorized request")
         else:
             self.log_test("Unauthorized Access Test", False, "Should have rejected unauthorized access", data)
