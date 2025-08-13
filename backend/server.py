@@ -557,7 +557,7 @@ async def get_partner_mood(current_user: User = Depends(get_current_user)):
 @api_router.get("/achievements/my-achievements")
 async def get_my_achievements(current_user: User = Depends(get_current_user)):
     achievements = await db.achievements.find({"user_id": current_user.id}).sort("unlocked_at", -1).to_list(None)
-    return achievements
+    return serialize_doc(achievements)
 
 @api_router.get("/achievements/check-new")
 async def check_new_achievements(current_user: User = Depends(get_current_user)):
