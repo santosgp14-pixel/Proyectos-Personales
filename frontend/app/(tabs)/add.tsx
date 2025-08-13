@@ -40,13 +40,7 @@ export default function AddActivityScreen() {
     try {
       setIsLoading(true);
       
-      // For now, we'll use the partner_id (this would normally come from user context)
-      const activityData: ActivityCreate = {
-        ...data,
-        receiver_id: 'partner-id' // This should be the actual partner ID
-      };
-
-      await activitiesAPI.create(activityData);
+      await activitiesAPI.create(data);
       
       Alert.alert(
         '¡Actividad creada!',
