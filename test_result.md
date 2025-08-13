@@ -107,87 +107,108 @@ user_problem_statement: "Crear aplicación móvil nativa LoveActs V2.0 para Andr
 backend:
   - task: "Authentication System (Login/Register)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented complete authentication system with JWT, bcrypt password hashing, user registration and login endpoints. Ready for testing."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - All authentication endpoints working correctly. User registration with unique partner codes, login with JWT tokens, and /auth/me endpoint all functional. JWT authentication properly protects endpoints."
 
   - task: "Couples Linking System"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented partner code generation, linking system with unique codes, and relationship management."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Partner linking system working perfectly. Unique 6-character codes generated, successful linking between partners, proper validation against self-linking and duplicate linking. Partner info retrieval with mood data working."
 
   - task: "Activities CRUD System"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented complete activities system with categories (físico, emocional, práctico, general), rating system (1-5 stars), comments, pending ratings endpoint."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Complete activities CRUD system working. Activity creation with all 4 categories, rating system (1-5 stars) with comments, pending ratings tracking, and proper partner validation all functional. Fixed MongoDB ObjectId serialization issues."
 
   - task: "Mood System"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented daily mood tracking with 5 emojis (😢😔😐😊🥰), notes, and partner mood viewing capability."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Mood system fully functional. Daily mood creation/update with 5 emoji options, optional notes, retrieval of own moods history, and partner mood viewing all working. Fixed serialization issues."
 
   - task: "Achievements & Gamification System"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented basic achievement system with automatic unlocking: first_activity, ten_activities, first_five_stars, five_five_stars, partner_linked."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Achievement system working correctly. Automatic achievement unlocking for first activity and partner linking verified. Achievement retrieval endpoint functional. Gamification logic properly implemented."
 
   - task: "Dashboard Stats API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented dashboard stats endpoint with activities given/received, ratings, achievements count, pending ratings."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Dashboard stats API working perfectly. Returns accurate counts for activities given/received, average ratings, achievements count, and pending ratings. Fixed null rating handling issues."
 
   - task: "Special Memories Algorithm"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented random algorithm to show 5-star rated activities as special memories."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Special memories algorithm working correctly. Retrieves 5-star activities from both given and received, randomizes them, and returns up to 10. Fixed MongoDB serialization issues."
 
 frontend:
   - task: "Authentication Screens (Login/Register)"
