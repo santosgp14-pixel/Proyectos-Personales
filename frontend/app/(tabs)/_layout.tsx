@@ -1,17 +1,18 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors } from '../../constants/Colors';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#ff69b4',
-        tabBarInactiveTintColor: '#999',
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.textSecondary,
         tabBarStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: Colors.background,
           borderTopWidth: 1,
-          borderTopColor: '#f0f0f0',
+          borderTopColor: Colors.border,
           paddingBottom: 8,
           height: 70,
         },
@@ -21,9 +22,9 @@ export default function TabLayout() {
           marginTop: 4,
         },
         headerStyle: {
-          backgroundColor: '#ff69b4',
+          backgroundColor: Colors.primary,
         },
-        headerTintColor: '#fff',
+        headerTintColor: Colors.textLight,
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -36,7 +37,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
-          headerTitle: '💕 LoveActs',
+          headerTitle: 'LoveActs',
         }}
       />
       <Tabs.Screen

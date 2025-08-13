@@ -8,6 +8,7 @@ import {
   TextInputProps 
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors } from '../constants/Colors';
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -35,7 +36,7 @@ export default function Input({
             style
           ]}
           secureTextEntry={isSecure}
-          placeholderTextColor="#999"
+          placeholderTextColor={Colors.textTertiary}
           {...props}
         />
         {isPassword && (
@@ -46,7 +47,7 @@ export default function Input({
             <Ionicons
               name={isSecure ? 'eye-off' : 'eye'}
               size={20}
-              color="#999"
+              color={Colors.textSecondary}
             />
           </TouchableOpacity>
         )}
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#333',
+    color: Colors.textPrimary,
     marginBottom: 8,
   },
   inputContainer: {
@@ -71,16 +72,17 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: Colors.border,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 16,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     minHeight: 50,
+    color: Colors.textPrimary,
   },
   inputError: {
-    borderColor: '#ff4757',
+    borderColor: Colors.error,
   },
   eyeButton: {
     position: 'absolute',
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     top: 15,
   },
   error: {
-    color: '#ff4757',
+    color: Colors.error,
     fontSize: 14,
     marginTop: 4,
   },
