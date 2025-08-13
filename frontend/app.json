@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.loveacts.mobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,8 +28,11 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.RECEIVE_BOOT_COMPLETED",
-        "android.permission.SCHEDULE_EXACT_ALARM"
-      ]
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ],
+      "package": "com.loveacts.mobile"
     },
     "web": {
       "bundler": "metro",
@@ -41,7 +45,8 @@
         "expo-notifications",
         {
           "icon": "./assets/images/notification-icon.png",
-          "color": "#ffffff"
+          "color": "#ffffff",
+          "sounds": []
         }
       ],
       [
@@ -56,6 +61,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "backendUrl": "https://8a7764bc-ab0e-4ccf-b313-a8ccff47a620.preview.emergentagent.com",
+      "eas": {
+        "projectId": "your-project-id-here"
+      }
     }
   }
 }
