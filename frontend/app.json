@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ff69b4"
+      "backgroundColor": "#5a6c75"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,7 +23,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ff69b4"
+        "backgroundColor": "#5a6c75"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
@@ -55,7 +55,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ff69b4"
+          "backgroundColor": "#5a6c75"
         }
       ]
     ],
