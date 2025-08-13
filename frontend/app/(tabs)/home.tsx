@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { dashboardAPI, moodsAPI } from '../../utils/api';
 import LoadingScreen from '../../components/LoadingScreen';
 import { MoodEmoji } from '../../types';
+import { Colors } from '../../constants/Colors';
 
 const MOOD_OPTIONS = [
   { emoji: MoodEmoji.VERY_SAD, label: 'Muy triste' },
@@ -113,25 +114,25 @@ export default function HomeScreen() {
           
           <View style={styles.statsGrid}>
             <View style={styles.statCard}>
-              <Ionicons name="heart" size={24} color="#ff69b4" />
+              <Ionicons name="heart" size={24} color={Colors.secondary} />
               <Text style={styles.statNumber}>{stats?.total_activities_given || 0}</Text>
               <Text style={styles.statLabel}>Actividades dadas</Text>
             </View>
 
             <View style={styles.statCard}>
-              <Ionicons name="star" size={24} color="#ffd700" />
+              <Ionicons name="star" size={24} color={Colors.warning} />
               <Text style={styles.statNumber}>{stats?.average_rating_given?.toFixed(1) || '0.0'}</Text>
               <Text style={styles.statLabel}>Calificación promedio</Text>
             </View>
 
             <View style={styles.statCard}>
-              <Ionicons name="trophy" size={24} color="#87ceeb" />
+              <Ionicons name="trophy" size={24} color={Colors.primary} />
               <Text style={styles.statNumber}>{stats?.achievements_count || 0}</Text>
               <Text style={styles.statLabel}>Logros</Text>
             </View>
 
             <View style={styles.statCard}>
-              <Ionicons name="time" size={24} color="#ff8c00" />
+              <Ionicons name="time" size={24} color={Colors.info} />
               <Text style={styles.statNumber}>{stats?.pending_ratings || 0}</Text>
               <Text style={styles.statLabel}>Por calificar</Text>
             </View>
@@ -143,12 +144,12 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Acciones rápidas</Text>
           
           <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="add-circle" size={20} color="#fff" />
+            <Ionicons name="add-circle" size={20} color={Colors.textLight} />
             <Text style={styles.actionText}>Nueva actividad</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="heart" size={20} color="#fff" />
+          <TouchableOpacity style={[styles.actionButton, styles.secondaryActionButton]}>
+            <Ionicons name="heart" size={20} color={Colors.textLight} />
             <Text style={styles.actionText}>Ver mi pareja</Text>
           </TouchableOpacity>
         </View>
@@ -160,13 +161,13 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: Colors.backgroundSecondary,
   },
   scrollContent: {
     padding: 16,
   },
   welcomeSection: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     padding: 20,
     borderRadius: 16,
     marginBottom: 16,
@@ -175,15 +176,15 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: Colors.textPrimary,
     marginBottom: 4,
   },
   welcomeSubtext: {
     fontSize: 16,
-    color: '#666',
+    color: Colors.textSecondary,
   },
   moodSection: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     padding: 20,
     borderRadius: 16,
     marginBottom: 16,
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333',
+    color: Colors.textPrimary,
     marginBottom: 16,
   },
   moodContainer: {
@@ -205,9 +206,9 @@ const styles = StyleSheet.create({
     minWidth: 60,
   },
   moodButtonSelected: {
-    backgroundColor: '#fff0f5',
+    backgroundColor: Colors.backgroundSecondary,
     borderWidth: 2,
-    borderColor: '#ff69b4',
+    borderColor: Colors.primary,
   },
   moodEmoji: {
     fontSize: 24,
@@ -215,11 +216,11 @@ const styles = StyleSheet.create({
   },
   moodLabel: {
     fontSize: 12,
-    color: '#666',
+    color: Colors.textSecondary,
     textAlign: 'center',
   },
   statsSection: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     padding: 20,
     borderRadius: 16,
     marginBottom: 16,
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     width: '48%',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: Colors.backgroundSecondary,
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -240,22 +241,22 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: Colors.textPrimary,
     marginTop: 8,
   },
   statLabel: {
     fontSize: 12,
-    color: '#666',
+    color: Colors.textSecondary,
     textAlign: 'center',
     marginTop: 4,
   },
   actionsSection: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     padding: 20,
     borderRadius: 16,
   },
   actionButton: {
-    backgroundColor: '#ff69b4',
+    backgroundColor: Colors.primary,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -263,8 +264,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 12,
   },
+  secondaryActionButton: {
+    backgroundColor: Colors.secondary,
+  },
   actionText: {
-    color: '#fff',
+    color: Colors.textLight,
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 8,
