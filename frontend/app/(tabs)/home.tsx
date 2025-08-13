@@ -1,0 +1,272 @@
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  RefreshControl,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../../hooks/useAuth';
+import { dashboardAPI, moodsAPI } from '../../utils/api';
+import LoadingScreen from '../../components/LoadingScreen';
+import { MoodEmoji } from '../../types';
+
+const MOOD_OPTIONS = [
+  { emoji: MoodEmoji.VERY_SAD, label: 'Muy triste' },
+  { emoji: MoodEmoji.SAD, label: 'Triste' },
+  { emoji: MoodEmoji.NEUTRAL, label: 'Normal' },
+  { emoji: MoodEmoji.HAPPY, label: 'Feliz' },
+  { emoji: MoodEmoji.VERY_HAPPY, label: 'Muy feliz' },
+];
+
+export default function HomeScreen() {
+  const { user } = useAuth();
+  const [selectedMood, setSelectedMood] = useState<MoodEmoji | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const { data: stats, isLoading, refetch } = useQuery({
+    queryKey: ['dashboard-stats'],
+    queryFn: dashboardAPI.getStats,
+  });
+
+  const { data: myMoods } = useQuery({
+    queryKey: ['my-moods'],
+    queryFn: moodsAPI.getMyMoods,
+  });
+
+  useEffect(() => {
+    // Check if user has set mood today
+    if (myMoods && myMoods.length > 0) {
+      const today = new Date().toDateString();
+      const todayMood = myMoods.find(mood => 
+        new Date(mood.date).toDateString() === today
+      );
+      if (todayMood) {
+        setSelectedMood(todayMood.mood_emoji);
+      }
+    }
+  }, [myMoods]);
+
+  const handleMoodSelect = async (mood: MoodEmoji) => {
+    try {
+      setSelectedMood(mood);
+      await moodsAPI.create({ mood_emoji: mood });
+      Alert.alert('¡Estado de ánimo actualizado!', 'Tu estado de ánimo ha sido guardado.');
+    } catch (error: any) {
+      Alert.alert('Error', 'No se pudo guardar tu estado de ánimo');
+      setSelectedMood(null);
+    }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {/* Welcome Section */}
+        <View style={styles.welcomeSection}>
+          <Text style={styles.welcomeText}>¡Hola, {user?.name}! 👋</Text>
+          <Text style={styles.welcomeSubtext}>¿Cómo te sientes hoy?</Text>
+        </View>
+
+        {/* Mood Selector */}
+        <View style={styles.moodSection}>
+          <Text style={styles.sectionTitle}>Mi estado de ánimo</Text>
+          <View style={styles.moodContainer}>
+            {MOOD_OPTIONS.map((mood) => (
+              <TouchableOpacity
+                key={mood.emoji}
+                style={[
+                  styles.moodButton,
+                  selectedMood === mood.emoji && styles.moodButtonSelected
+                ]}
+                onPress={() => handleMoodSelect(mood.emoji)}
+              >
+                <Text style={styles.moodEmoji}>{mood.emoji}</Text>
+                <Text style={styles.moodLabel}>{mood.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* Stats Cards */}
+        <View style={styles.statsSection}>
+          <Text style={styles.sectionTitle}>Resumen</Text>
+          
+          <View style={styles.statsGrid}>
+            <View style={styles.statCard}>
+              <Ionicons name="heart" size={24} color="#ff69b4" />
+              <Text style={styles.statNumber}>{stats?.total_activities_given || 0}</Text>
+              <Text style={styles.statLabel}>Actividades dadas</Text>
+            </View>
+
+            <View style={styles.statCard}>
+              <Ionicons name="star" size={24} color="#ffd700" />
+              <Text style={styles.statNumber}>{stats?.average_rating_given?.toFixed(1) || '0.0'}</Text>
+              <Text style={styles.statLabel}>Calificación promedio</Text>
+            </View>
+
+            <View style={styles.statCard}>
+              <Ionicons name="trophy" size={24} color="#87ceeb" />
+              <Text style={styles.statNumber}>{stats?.achievements_count || 0}</Text>
+              <Text style={styles.statLabel}>Logros</Text>
+            </View>
+
+            <View style={styles.statCard}>
+              <Ionicons name="time" size={24} color="#ff8c00" />
+              <Text style={styles.statNumber}>{stats?.pending_ratings || 0}</Text>
+              <Text style={styles.statLabel}>Por calificar</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Quick Actions */}
+        <View style={styles.actionsSection}>
+          <Text style={styles.sectionTitle}>Acciones rápidas</Text>
+          
+          <TouchableOpacity style={styles.actionButton}>
+            <Ionicons name="add-circle" size={20} color="#fff" />
+            <Text style={styles.actionText}>Nueva actividad</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.actionButton}>
+            <Ionicons name="heart" size={20} color="#fff" />
+            <Text style={styles.actionText}>Ver mi pareja</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  scrollContent: {
+    padding: 16,
+  },
+  welcomeSection: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 16,
+    marginBottom: 16,
+    alignItems: 'center',
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  welcomeSubtext: {
+    fontSize: 16,
+    color: '#666',
+  },
+  moodSection: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 16,
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 16,
+  },
+  moodContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  moodButton: {
+    alignItems: 'center',
+    padding: 8,
+    borderRadius: 12,
+    minWidth: 60,
+  },
+  moodButtonSelected: {
+    backgroundColor: '#fff0f5',
+    borderWidth: 2,
+    borderColor: '#ff69b4',
+  },
+  moodEmoji: {
+    fontSize: 24,
+    marginBottom: 4,
+  },
+  moodLabel: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  statsSection: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 16,
+    marginBottom: 16,
+  },
+  statsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  statCard: {
+    width: '48%',
+    backgroundColor: '#f8f9fa',
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginTop: 8,
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 4,
+  },
+  actionsSection: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 16,
+  },
+  actionButton: {
+    backgroundColor: '#ff69b4',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+  actionText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+});
