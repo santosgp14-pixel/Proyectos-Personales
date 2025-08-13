@@ -119,13 +119,20 @@ class LoveActsAPITester:
     
     def test_user_login(self):
         """Test user login"""
+        # Use the same email that was registered
+        if not hasattr(self, 'user1_data') or not self.user1_data:
+            self.log_test("User Login", False, "No user data available for login test")
+            return False
+            
         login_data = {
-            "email": "sofia.martinez@email.com",
+            "email": self.user1_data["email"],
             "password": "MiAmorEterno2024!"
         }
         
         success, data, status = self.make_request("POST", "/auth/login", login_data)
         if success and data.get("access_token"):
+            # Update token in case it changed
+            self.user1_token = data["access_token"]
             self.log_test("User Login", True, "Sofia login successful")
             return True
         else:
