@@ -14,6 +14,7 @@ import { useAuth } from '../../hooks/useAuth';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { RegisterData } from '../../types';
+import { Colors } from '../../constants/Colors';
 
 export default function RegisterScreen() {
   const [isLoading, setIsLoading] = useState(false);
@@ -156,7 +157,7 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   keyboardView: {
     flex: 1,
@@ -173,12 +174,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#ff69b4',
+    color: Colors.primary,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: Colors.textSecondary,
     textAlign: 'center',
   },
   formContainer: {

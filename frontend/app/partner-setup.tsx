@@ -16,6 +16,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import { couplesAPI } from '../utils/api';
 import { LinkPartnerData } from '../types';
+import { Colors } from '../constants/Colors';
 
 export default function PartnerSetupScreen() {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +72,7 @@ export default function PartnerSetupScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
-            <Text style={styles.title}>💕 Vincular Pareja</Text>
+            <Text style={styles.title}>Vincular Pareja</Text>
             <Text style={styles.subtitle}>
               Conecta con tu pareja para comenzar a compartir momentos especiales
             </Text>
@@ -146,7 +147,7 @@ export default function PartnerSetupScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   keyboardView: {
     flex: 1,
@@ -162,17 +163,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#ff69b4',
+    color: Colors.primary,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: Colors.textSecondary,
     textAlign: 'center',
     lineHeight: 22,
   },
   codeSection: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: Colors.backgroundSecondary,
     padding: 20,
     borderRadius: 16,
     marginBottom: 24,
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333',
+    color: Colors.textPrimary,
     marginBottom: 16,
     textAlign: 'center',
   },
@@ -191,13 +192,13 @@ const styles = StyleSheet.create({
   codeText: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#ff69b4',
-    backgroundColor: '#fff',
+    color: Colors.primary,
+    backgroundColor: Colors.background,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#ff69b4',
+    borderColor: Colors.primary,
     marginBottom: 16,
     letterSpacing: 4,
   },
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   },
   codeHelp: {
     fontSize: 14,
-    color: '#666',
+    color: Colors.textSecondary,
     textAlign: 'center',
     lineHeight: 18,
   },
@@ -219,12 +220,12 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: Colors.border,
   },
   dividerText: {
     marginHorizontal: 16,
     fontSize: 16,
-    color: '#666',
+    color: Colors.textSecondary,
     fontWeight: '500',
   },
   formContainer: {
