@@ -32,7 +32,8 @@
         "android.permission.INTERNET",
         "android.permission.ACCESS_NETWORK_STATE"
       ],
-      "package": "com.loveacts.mobile"
+      "package": "com.loveacts.mobile",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",
@@ -65,7 +66,7 @@
     "extra": {
       "backendUrl": "https://8a7764bc-ab0e-4ccf-b313-a8ccff47a620.preview.emergentagent.com",
       "eas": {
-        "projectId": "your-project-id-here"
+        "projectId": "ab0e4ccf-b313-a8cc-ff47-a620loveacts"
       }
     }
   }
