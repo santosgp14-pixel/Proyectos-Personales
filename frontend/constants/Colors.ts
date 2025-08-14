@@ -1,35 +1,44 @@
-// Neutral Color Palette for LoveActs V2.0
+// Vibrant yet Professional Color Palette for LoveActs V2.0
 export const Colors = {
-  // Primary colors
-  primary: '#5a6c75',          // Dark blue-gray
-  primaryLight: '#7a8c95',     // Light blue-gray
-  primaryDark: '#3a4c55',      // Darker blue-gray
+  // Primary colors - More vibrant blues
+  primary: '#3498db',          // Bright blue
+  primaryLight: '#5dade2',     // Light bright blue
+  primaryDark: '#2980b9',      // Darker bright blue
   
-  // Secondary colors
-  secondary: '#4caf50',        // Soft green
-  secondaryLight: '#6cbf70',   // Light green
-  secondaryDark: '#2c8f30',    // Dark green
+  // Secondary colors - Warm and friendly
+  secondary: '#e74c3c',        // Warm red/coral
+  secondaryLight: '#ec7063',   // Light coral
+  secondaryDark: '#c0392b',    // Dark coral
   
-  // Neutral colors
-  background: '#ffffff',       // White background
-  backgroundSecondary: '#f8f9fa', // Light gray background
-  backgroundTertiary: '#e9ecef',  // Medium gray background
+  // Accent colors - Fresh and lively
+  accent: '#f39c12',           // Warm orange
+  accentLight: '#f7dc6f',      // Light warm yellow
   
-  // Text colors
-  textPrimary: '#2c3e50',      // Dark gray-blue text
-  textSecondary: '#6c757d',    // Medium gray text
-  textTertiary: '#adb5bd',     // Light gray text
+  // Neutral colors - Warm grays
+  background: '#ffffff',       // Pure white background
+  backgroundSecondary: '#f8f9fa', // Very light gray
+  backgroundTertiary: '#ecf0f1',  // Light warm gray
+  
+  // Text colors - Professional but warm
+  textPrimary: '#2c3e50',      // Dark blue-gray text
+  textSecondary: '#7f8c8d',    // Medium gray text
+  textTertiary: '#bdc3c7',     // Light gray text
   textLight: '#ffffff',        // White text
   
   // Border colors
   border: '#dee2e6',           // Light border
   borderSecondary: '#ced4da',  // Medium border
   
-  // Status colors
-  success: '#28a745',          // Green
-  warning: '#ffc107',          // Yellow
-  error: '#dc3545',            // Red
-  info: '#17a2b8',            // Blue
+  // Status colors - Vibrant and clear
+  success: '#27ae60',          // Fresh green
+  warning: '#f39c12',          // Warm orange
+  error: '#e74c3c',            // Clear red
+  info: '#3498db',            // Bright blue
+  
+  // Special colors for love theme
+  love: '#e91e63',            // Pink for romantic elements
+  loveLight: '#f8bbd9',       // Light pink
+  heart: '#e74c3c',           // Heart red
   
   // UI Elements
   shadow: 'rgba(0, 0, 0, 0.1)',
@@ -38,7 +47,7 @@ export const Colors = {
 
 // Legacy color mapping for easy migration
 export const LegacyColors = {
-  pink: Colors.primary,
-  blue: Colors.secondary,
+  pink: Colors.love,
+  blue: Colors.primary,
   white: Colors.background,
 };
