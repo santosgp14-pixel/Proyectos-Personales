@@ -49,7 +49,7 @@ export default function LoginScreen() {
             <View style={styles.iconContainer}>
               <Ionicons name="heart" size={48} color={Colors.heart} />
             </View>
-            <Text style={styles.title}>LoveActs</Text>
+            <Text style={styles.title}>💕 LoveActs</Text>
             <Text style={styles.subtitle}>Conecta con tu pareja a través del amor</Text>
           </View>
 
