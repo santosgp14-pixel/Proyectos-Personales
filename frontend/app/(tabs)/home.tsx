@@ -114,13 +114,13 @@ export default function HomeScreen() {
           
           <View style={styles.statsGrid}>
             <View style={styles.statCard}>
-              <Ionicons name="heart" size={24} color={Colors.secondary} />
+              <Ionicons name="heart" size={24} color={Colors.heart} />
               <Text style={styles.statNumber}>{stats?.total_activities_given || 0}</Text>
               <Text style={styles.statLabel}>Actividades dadas</Text>
             </View>
 
             <View style={styles.statCard}>
-              <Ionicons name="star" size={24} color={Colors.warning} />
+              <Ionicons name="star" size={24} color={Colors.accent} />
               <Text style={styles.statNumber}>{stats?.average_rating_given?.toFixed(1) || '0.0'}</Text>
               <Text style={styles.statLabel}>Calificación promedio</Text>
             </View>
