@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { Link } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
-import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
