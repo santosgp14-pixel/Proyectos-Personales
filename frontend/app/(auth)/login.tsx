@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Link } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
+import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -45,6 +46,9 @@ export default function LoginScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
+            <View style={styles.iconContainer}>
+              <Ionicons name="heart" size={48} color={Colors.heart} />
+            </View>
             <Text style={styles.title}>LoveActs</Text>
             <Text style={styles.subtitle}>Conecta con tu pareja a través del amor</Text>
           </View>
@@ -133,6 +137,15 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     marginBottom: 48,
+  },
+  iconContainer: {
+    backgroundColor: Colors.loveLight,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
   },
   title: {
     fontSize: 36,
