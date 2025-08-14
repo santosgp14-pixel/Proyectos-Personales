@@ -147,9 +147,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
+  },
   title: {
     alignItems: 'center',
     marginBottom: 48,
+  },
   },
   title: {
     fontSize: 36,
